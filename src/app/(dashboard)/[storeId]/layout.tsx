@@ -1,3 +1,4 @@
+import { Navbar } from "@/components/navbar";
 import { db } from "@/lib/prisma-db";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
@@ -18,13 +19,14 @@ export default async function DashboardLayout({
   const store = await db.store.findFirst({
     where: { id: params.storeId, userId },
   });
+
   if (!store) {
     redirect("/");
   }
 
   return (
     <>
-      <div>This will be navbar</div>
+      <Navbar />
       {children}
     </>
   );

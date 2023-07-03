@@ -14,10 +14,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { ColorColumn } from "./columns";
+import { ProductColumn } from "./columns";
 
 interface CellActionProps {
-  data: ColorColumn;
+  data: ProductColumn;
 }
 
 export function CellAction({ data }: CellActionProps) {
@@ -35,13 +35,13 @@ export function CellAction({ data }: CellActionProps) {
     try {
       setLoading(true);
 
-      await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/products/${data.id}`);
 
       router.refresh();
-      toast.success("Color Deleted");
+      toast.success("Product Deleted");
     } catch (error) {
       toast.error(
-        "Make sure you have removed all active sizes on this billboard."
+        "Make sure you have removed all active categories on this billboard."
       );
     } finally {
       setLoading(false);
@@ -71,7 +71,9 @@ export function CellAction({ data }: CellActionProps) {
             Copy ID
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}
+            onClick={() =>
+              router.push(`/${params.storeId}/products/${data.id}`)
+            }
           >
             <Edit className="mr-2 h-4 w-4" />
             Update

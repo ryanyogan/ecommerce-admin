@@ -41,7 +41,7 @@ export default function CategoriesClient({ data }: CategoriesClientProps) {
 
       <Separator />
 
-      <ApiList entityName="categoriees" entityIdName="categoryId" />
+      <ApiList entityName="categories" entityIdName="categoryId" />
     </>
   );
 }

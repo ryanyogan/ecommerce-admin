@@ -64,7 +64,7 @@ export function ColorForm({ initialData }: ColorFormProps) {
           data
         );
       } else {
-        await axios.post(`/api/${params.storeId}/color`, data);
+        await axios.post(`/api/${params.storeId}/colors`, data);
       }
 
       router.refresh();

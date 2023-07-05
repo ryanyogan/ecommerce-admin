@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     .filter((c) => c !== null)
     .join(", ");
 
-  const order = await db.order.update({
+  await db.order.update({
     where: {
       id: session?.metadata?.orderId,
     },
@@ -48,18 +48,18 @@ export async function POST(request: Request) {
     },
   });
 
-  const productIds = order.orderItems.map((orderItem) => orderItem.productId);
+  // const productIds = order.orderItems.map((orderItem) => orderItem.productId);
 
-  await db.product.updateMany({
-    where: {
-      id: {
-        in: [...productIds],
-      },
-    },
-    data: {
-      isArchived: true,
-    },
-  });
+  // await db.product.updateMany({
+  //   where: {
+  //     id: {
+  //       in: [...productIds],
+  //     },
+  //   },
+  //   data: {
+  //     isArchived: true,
+  //   },
+  // });
 
   return new NextResponse(null, { status: 200 });
 }

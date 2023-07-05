@@ -22,7 +22,7 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { billboardId: string } }
+  { params }: { params: { billboardId: string; storeId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -31,6 +31,7 @@ export async function PATCH(
     }
 
     const body = await request.json();
+
     const { label, imageUrl } = body;
 
     if (!label || !imageUrl) {
@@ -42,11 +43,11 @@ export async function PATCH(
     }
 
     const storeByUserId = await db.store.findFirst({
-      where: { id: params.billboardId, userId },
+      where: { id: params.storeId, userId },
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 403 });
+      return new NextResponse("Forbidden", { status: 403 });
     }
 
     const store = await db.billboard.updateMany({

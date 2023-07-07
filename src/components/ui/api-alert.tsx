@@ -40,9 +40,11 @@ export function ApiAlert({
         <Badge variant={variantMap[variant]}>{textMap[variant]}</Badge>
       </AlertTitle>
       <AlertDescription className="mt-4 flex items-center justify-between">
-        <code className="relative rounded bg-muted px-[03rem] py-[0.2rem] font-mono text-sm font-semibold">
-          {description}
-        </code>
+        <div className="text-xs font-semibold text-indigo-800 underline underline-offset-2">
+          <a href={description} target="_blank">
+            {description}
+          </a>
+        </div>
         <Button variant="outline" size="sm" onClick={() => onCopy(description)}>
           <Copy className="h-4 w-4" />
         </Button>

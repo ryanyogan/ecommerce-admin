@@ -50,6 +50,13 @@ export async function PATCH(
       return new NextResponse("Forbidden", { status: 403 });
     }
 
+    if (featured) {
+      await db.billboard.updateMany({
+        where: { featured: true },
+        data: { featured: false },
+      });
+    }
+
     const store = await db.billboard.updateMany({
       where: {
         id: params.billboardId,
@@ -57,6 +64,7 @@ export async function PATCH(
       data: {
         label,
         imageUrl,
+        featured,
       },
     });
 

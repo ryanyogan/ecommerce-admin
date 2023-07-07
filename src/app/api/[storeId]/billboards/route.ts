@@ -10,7 +10,7 @@ export async function POST(
     const { userId } = auth();
     const body = await request.json();
 
-    const { label, imageUrl } = body;
+    const { label, imageUrl, featured } = body;
 
     if (!userId || !params.storeId) {
       return new NextResponse("Unauthenticated", { status: 401 });
@@ -18,6 +18,13 @@ export async function POST(
 
     if (!label || !imageUrl) {
       return new NextResponse("Name & ImageURL is required", { status: 400 });
+    }
+
+    if (featured) {
+      await db.billboard.updateMany({
+        where: { featured: true },
+        data: { featured: false },
+      });
     }
 
     const storeByUserId = await db.store.findFirst({
@@ -33,6 +40,7 @@ export async function POST(
         label,
         imageUrl,
         storeId: params.storeId,
+        featured,
       },
     });
 
@@ -44,15 +52,15 @@ export async function POST(
 }
 
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: { storeId: string } }
 ) {
   try {
-    const store = await db.billboard.findMany({
+    const billboards = await db.billboard.findMany({
       where: { storeId: params.storeId },
     });
 
-    return NextResponse.json(store);
+    return NextResponse.json(billboards);
   } catch (error) {
     console.log(`[BILLBOARD_GET]`, error);
     return new NextResponse("Internal Error", { status: 500 });

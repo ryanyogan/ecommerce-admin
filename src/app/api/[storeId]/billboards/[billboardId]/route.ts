@@ -32,7 +32,7 @@ export async function PATCH(
 
     const body = await request.json();
 
-    const { label, imageUrl } = body;
+    const { label, imageUrl, featured } = body;
 
     if (!label || !imageUrl) {
       return new NextResponse("Name & ImageURL is required", { status: 400 });

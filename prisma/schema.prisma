@@ -23,16 +23,22 @@ model Store {
 }
 
 model Billboard {
-  id         String     @id @default(uuid())
-  storeId    String
-  store      Store      @relation("StoreToBillboard", fields: [storeId], references: [id])
+  id String @id @default(uuid())
+
+  storeId String
+  store   Store  @relation("StoreToBillboard", fields: [storeId], references: [id])
+
+  featured Boolean @default(false)
+
   label      String
   imageUrl   String
   categories Category[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([storeId])
+  @@index([featured])
 }
 
 model Category {

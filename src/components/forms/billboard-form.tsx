@@ -1,6 +1,5 @@
 "use client";
 
-import { useOrigin } from "@/hooks/use-origin";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Billboard } from "@prisma/client";
 import axios from "axios";
@@ -15,6 +14,7 @@ import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,10 +24,12 @@ import { Heading } from "../ui/heading";
 import { ImageUpload } from "../ui/image-upload";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
+import { Switch } from "../ui/switch";
 
 const formSchema = z.object({
   label: z.string().min(1),
   imageUrl: z.string().min(1),
+  featured: z.boolean(),
 });
 
 type BillboardFormValues = z.infer<typeof formSchema>;
@@ -41,7 +43,6 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const origin = useOrigin();
   const title = initialData ? "Edit Billboard" : "Create Billboard";
   const description = initialData
     ? "Edit A Billboard"
@@ -54,6 +55,7 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
     defaultValues: initialData || {
       label: "",
       imageUrl: "",
+      featured: false,
     },
   });
 
@@ -170,6 +172,29 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
               )}
             />
           </div>
+
+          <FormField
+            control={form.control}
+            name="featured"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">
+                    Make Featured Hero Unit
+                  </FormLabel>
+                  <FormDescription>
+                    Featured hero unit will display on the home page.
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
           <Button disabled={loading} className="ml-auto" type="submit">
             {action}

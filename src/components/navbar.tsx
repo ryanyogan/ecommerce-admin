@@ -24,7 +24,7 @@ export async function Navbar() {
       <div className="flex h-16 items-center px-4">
         <StoreSwitcher items={stores} />
         <MainNav className="mx-6 overflow-auto" />
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="ml-auto hidden sm:flex items-center space-x-1 sm:space-x-4">
           <div className="hidden sm:block">
             <ThemeToggle />
           </div>

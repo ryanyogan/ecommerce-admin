@@ -25,7 +25,9 @@ export async function Navbar() {
         <StoreSwitcher items={stores} />
         <MainNav className="mx-6 overflow-auto" />
         <div className="ml-auto flex items-center space-x-4">
-          <ThemeToggle />
+          <div className="hidden sm:block">
+            <ThemeToggle />
+          </div>
           <UserButton afterSignOutUrl="/" />
         </div>
       </div>

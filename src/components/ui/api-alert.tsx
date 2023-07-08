@@ -40,7 +40,7 @@ export function ApiAlert({
         <Badge variant={variantMap[variant]}>{textMap[variant]}</Badge>
       </AlertTitle>
       <AlertDescription className="mt-4 flex items-center justify-between">
-        <div className="text-xs font-semibold text-indigo-600 underline underline-offset-2">
+        <div className="text-xs font-semibold text-indigo-600 dark:text-neutral-300 underline underline-offset-2">
           <a href={description} target="_blank">
             {description}
           </a>

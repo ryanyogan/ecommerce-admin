@@ -133,7 +133,7 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
+          className="space-y-8 w-full max-w-2xl"
         >
           <FormField
             control={form.control}
@@ -149,11 +149,15 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
                     onRemove={() => field.onChange("")}
                   />
                 </FormControl>
+                <FormDescription>
+                  This is your public display name. It can be your real name or
+                  a pseudonym. You can only change this once every 30 days.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-3 gap-8">
+          <div className="gap-8">
             <FormField
               control={form.control}
               name="label"
@@ -167,6 +171,10 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
                       {...field}
                     />
                   </FormControl>
+                  <FormDescription>
+                    This is your public display name. It can be your real name
+                    or a pseudonym. You can only change this once every 30 days.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

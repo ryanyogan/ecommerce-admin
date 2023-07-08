@@ -29,7 +29,7 @@ export default function CategoriesClient({ data }: CategoriesClientProps) {
           onClick={() => router.push(`/${params.storeId}/categories/new`)}
         >
           <Plus className="mr-2 h-4 w-4" />
-          Add New
+          New
         </Button>
       </div>
 

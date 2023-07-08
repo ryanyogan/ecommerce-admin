@@ -27,7 +27,7 @@ export default function ColorClient({ data }: ColorClientProps) {
 
         <Button onClick={() => router.push(`/${params.storeId}/colors/new`)}>
           <Plus className="mr-2 h-4 w-4" />
-          Add New
+          New
         </Button>
       </div>
 
